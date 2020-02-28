@@ -92,7 +92,7 @@ public class Signature {
 				label.setSize((int)label.getPreferredSize().getWidth() + 20, (int)label.getPreferredSize().getHeight());
 				break;
 			case PECITA:
-				label.setSize((int)label.getPreferredSize().getWidth() + 120, (int)label.getPreferredSize().getHeight());
+				label.setSize((int)label.getPreferredSize().getWidth() + 150, (int)label.getPreferredSize().getHeight());
 				break;
 			case SCRIPTINA:
 				label.setSize((int)label.getPreferredSize().getWidth() + 100, (int)label.getPreferredSize().getHeight());
