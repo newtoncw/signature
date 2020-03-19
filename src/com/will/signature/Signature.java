@@ -182,10 +182,12 @@ public class Signature {
 		
 		f = f.deriveFont(110.0F);
 		
-		Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
-		attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
-
-		f = f.deriveFont(attributes);
+		if(strike) {
+			Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
+			attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+	
+			f = f.deriveFont(attributes);
+		}
 		
 		return f;
 	}
