@@ -3,10 +3,13 @@ package com.will.signature;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -45,9 +48,13 @@ public class Signature {
 	}
 	
 	public static byte[] getSignature(String name, SignFont font) throws IOException, FontFormatException, URISyntaxException {
+		return Signature.getSignature(name, font, false);
+	}
+	
+	public static byte[] getSignature(String name, SignFont font, boolean strike) throws IOException, FontFormatException, URISyntaxException {
 		JLabel label = new JLabel(name);
 		
-		label.setFont(Signature.getFont(font));
+		label.setFont(Signature.getFont(font, strike));
 		label.setForeground(java.awt.Color.BLACK);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -113,7 +120,7 @@ public class Signature {
 		return out.toByteArray();
 	}
 	
-	private static Font getFont(SignFont font) throws FontFormatException, IOException, URISyntaxException {
+	private static Font getFont(SignFont font, boolean strike) throws FontFormatException, IOException, URISyntaxException {
 		Font f = null;
 		
 		switch(font) {
@@ -173,8 +180,12 @@ public class Signature {
 				break;
 		}
 		
-		
 		f = f.deriveFont(110.0F);
+		
+		Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
+		attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
+
+		f = f.deriveFont(attributes);
 		
 		return f;
 	}
